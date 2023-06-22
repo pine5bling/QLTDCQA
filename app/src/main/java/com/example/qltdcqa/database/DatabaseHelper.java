@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 
 import android.content.SharedPreferences;
 
-import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class DatabaseHelper {
      * monAn
      */
 
-    public List<MonAn> layMonAn() {
+    public List<MonAn> layDSMonAn() {
         List<MonAn> maList = new ArrayList<>();
         String maShare = sharedPreferences.getString(KEY_MON_AN, "");
         Type maType = new TypeToken<ArrayList<MonAn>>() {
@@ -50,11 +49,7 @@ public class DatabaseHelper {
     }
 
     public List<MonAn> layDSLietKe() {
-        List<MonAn> maList = new ArrayList<>();
-        String maShare = sharedPreferences.getString(KEY_MON_AN, "");
-        Type maType = new TypeToken<ArrayList<MonAn>>() {
-        }.getType();
-        maList = gson.fromJson(maShare, maType);
+        List<MonAn> maList = layDSMonAn();
         List<MonAn> maList2 = new ArrayList<>();
         for (int i = 0; i < maList.size(); i++) {
             if (maList.get(i).getGiaDat() == 200 && maList.get(i).getThoiGianLamMon() < 15) {
@@ -65,7 +60,7 @@ public class DatabaseHelper {
     }
 
     public void themMonAn(MonAn monAn) {
-        List<MonAn> monAns = layMonAn();
+        List<MonAn> monAns = layDSMonAn();
         if (monAns == null) {
             monAns = new ArrayList<>();
             monAn.setMaMon(1);
@@ -80,7 +75,7 @@ public class DatabaseHelper {
 
     public List<Integer> layDSIdMonAn() {
         List<Integer> idMAList = new ArrayList<>();
-        List<MonAn> monAnList = layMonAn();
+        List<MonAn> monAnList = layDSMonAn();
         for (MonAn monAn : monAnList) {
             int idMA = monAn.getMaMon();
             idMAList.add(idMA);
@@ -92,7 +87,7 @@ public class DatabaseHelper {
      * loaiMon
      */
 
-    public List<LoaiMon> layLoaiMon() {
+    public List<LoaiMon> layDSLoaiMon() {
         List<LoaiMon> loaiList = new ArrayList<>();
         String loaiShare = sharedPreferences.getString(KEY_LOAI_MON, "");
         Type loaiType = new TypeToken<ArrayList<LoaiMon>>() {
@@ -105,7 +100,7 @@ public class DatabaseHelper {
     }
 
     public void themLoaiMon(LoaiMon loaiMon) {
-        List<LoaiMon> loaiMons = layLoaiMon();
+        List<LoaiMon> loaiMons = layDSLoaiMon();
         if (loaiMons == null) {
             loaiMons = new ArrayList<>();
             loaiMon.setMaLoai(1);
@@ -120,7 +115,7 @@ public class DatabaseHelper {
 
     public List<Integer> layDSIdLoaiMon() {
         List<Integer> idLMList = new ArrayList<>();
-        List<LoaiMon> loaiMonList = layLoaiMon();
+        List<LoaiMon> loaiMonList = layDSLoaiMon();
         for (LoaiMon loaiMon : loaiMonList) {
             int idLoaiMon = loaiMon.getMaLoai();
             idLMList.add(idLoaiMon);
@@ -132,7 +127,7 @@ public class DatabaseHelper {
      * loaiMonAn
      */
 
-    public List<LoaiMonAn> layLoaiMonAn() {
+    public List<LoaiMonAn> layDSLoaiMonAn() {
         List<LoaiMonAn> loaiMonAns = new ArrayList<>();
         String loaiMAShare = sharedPreferences.getString(KEY_LOAI_MON_AN, "");
         Type loaiMAType = new TypeToken<ArrayList<LoaiMonAn>>() {
@@ -145,7 +140,7 @@ public class DatabaseHelper {
     }
 
     public void themLoaiMonAn(LoaiMonAn loaiMon) {
-        List<LoaiMonAn> loaiMonAns = layLoaiMonAn();
+        List<LoaiMonAn> loaiMonAns = layDSLoaiMonAn();
         if (loaiMonAns == null) {
             loaiMonAns = new ArrayList<>();
             loaiMon.setIdMonAn(1);

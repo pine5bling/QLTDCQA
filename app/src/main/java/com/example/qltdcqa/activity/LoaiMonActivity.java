@@ -67,7 +67,7 @@ public class LoaiMonActivity extends AppCompatActivity {
     }
 
     public void setupListView() {
-        loaiMons = databaseHelper.layLoaiMon();
+        loaiMons = databaseHelper.layDSLoaiMon();
         ArrayAdapter<LoaiMon> loaiMonArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , loaiMons);
         lvLoaiMon.setAdapter(loaiMonArrayAdapter);
     }
